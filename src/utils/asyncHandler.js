@@ -1,21 +1,24 @@
+//Notes
+// Return kar denge 'promise' ke format mai
+
 const asyncHandler = (requestHandler) => {
-    (req, res, next) => {
+    return (req, res, next) => {
         Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err))
     }
 }
 
 export {asyncHandler}
 
-
-// Higher Order Function -> vo functions jo functions ko as a parameter bhi accept kar sakte hai ya fir usko return kar sakte hai
-
-
-// Syntax of HIGHER ORDER FUNCTION
-
 // const asyncHandler = () => {}
 // const asyncHandler = (func) => {() => {}}
 // const asyncHandler = (func) => () => {}
 // const asyncHandler = (func) => async () => {}
+
+
+// Notes
+// now we have the async function
+// jo humne pass kara hai usmai se hum extract kar lete hai "req, res, next" and pass them as parameter in async function
+// try-catch => because jo bhi function mai lunga uspe async and try-catch ka wrapper laga rha hu
 
 // const asyncHandler = (fn) => async (req, res, next) => {
 //     try {
