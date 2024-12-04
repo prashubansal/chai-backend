@@ -12,4 +12,29 @@ This is a video series on backend with javascript
 
 **Step1:**- 
 
+## File Upload
 
+**1. Services and Packages**
+- cloudinary
+- multer
+
+**2. Strategy**
+
+Step1: user se file upload karwayenge using 'multer' and apne local server pe temporarily us file ko rakh denge
+
+Step2: using cloudinary, we'll take file from local server and upload it on server 
+
+**3. How to do it**
+
+    > import v2 from 'cloudinary'
+    > import fs from 'fs' 
+    > put cloud_name, api_key, api_secret in '.env' file
+    > cloudinary.config in cloudinary.js file
+    > create a method and pass local file path as a parameter in that function and upload it
+    > if successfully uploaded then unlink(delete) the file from file system(local server) 
+
+**4. create a middleware (multer)**
+
+- wherever I need file upload capabilities, we'll inject the multer there
+- we are using DiskStorage to store the files.
+-  
