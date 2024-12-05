@@ -22,15 +22,15 @@ const registerUser = asyncHandler( async (req, res) => {
     // return response to frontend
 
     const {fullName, username, email, password} = req.body
-    console.log("email: ", email);
+    // console.log("email: ", email);
 
     if (
-        [fullname, email, username, password].some((field) => field?.trim() === "")
+        [fullName, email, username, password].some((field) => field?.trim() === "")
     ){
         throw new ApiError(400, "All fields are required")
     }
 
-    const existedUser = User.findOne({
+    const existedUser = await User.findOne({
         $or: [{ username }, { email }]
     })
 
@@ -41,8 +41,17 @@ const registerUser = asyncHandler( async (req, res) => {
     // for checking Images/files saved by multer on loacl server 
     // we cannot use req.body
     // use req.files
+
+    // console.log(req.files);
+    
     const avatarLocalPath = req.files?.avatar[0]?.path
-    const coverImageLocalPath = req.files?.coverImage[0].path
+    // const coverImageLocalPath = req.files?.coverImage[0]?.path
+
+    // checking if coverImage is given or not
+    let coverImageLocalPath;
+    if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0){
+        coverImageLocalPath = req.files.coverImage[0].path
+    }
 
     if (!avatarLocalPath) {
         throw new ApiError(400, "Avatar file is required")
@@ -50,11 +59,13 @@ const registerUser = asyncHandler( async (req, res) => {
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
-
+    // if coverImage is not there, cloudinary doesn't return error instead it will return an empty string.
+    
     if(!avatar){
         throw new ApiError(400, "Avatar not uploaded on cloudinary")
     }
 
+    // create a user object in db
     const user = await User.create({
         fullName,
         avatar: avatar.url,
