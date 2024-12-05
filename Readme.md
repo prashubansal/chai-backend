@@ -38,3 +38,18 @@ Step2: using cloudinary, we'll take file from local server and upload it on serv
 - wherever I need file upload capabilities, we'll inject the multer there
 - we are using DiskStorage to store the files.
 -  
+
+## RefreshToken and AccessToken
+
+**AccessToken** - usually short lived(short term expiry) 
+
+**RefreshToken** - usually long lived(long term expiry)
+
+**Why**
+- Till you have AccessToken, you can access the resources/feature, no need for authentication
+- RefreshToken is saved in database and will be provided to the user.
+- User is validated through AccessToken only. 
+- But user do not need to enter password to get the new AccessToken everytime, if you have your RefreshToken then hit a specific end point, if the user's RefreshToken and DB's RefreshToken matches, it will give the user a new AccessToken.
+
+
+
