@@ -51,7 +51,28 @@ Step2: using cloudinary, we'll take file from local server and upload it on serv
 - User is validated through AccessToken only. 
 - But user do not need to enter password to get the new AccessToken everytime, if you have your RefreshToken then hit a specific end point, if the user's RefreshToken and DB's RefreshToken matches, it will give the user a new AccessToken.
 
+## Join subscription model with user model (Left Join)
+
+- Join means => subscription se jitni bhi info milti hai usko join kar do user ke andar
+
+### Aggregation Pipelines
+
+An aggregation pipeline consists of one or more stages that process documents:
+
+Each stage performs an operation on the input documents. For example, a stage can filter documents, group documents, and calculate values.
+
+The documents that are output from a stage are passed to the next stage.
+
+### Video:20
+
+Task -> subscription se jitni bhi info milti hai usko join kardo users ke andar bhi
 
 
 
+## Overview
 
+
+## Assignments after completing series
+Video24
+
+## 
